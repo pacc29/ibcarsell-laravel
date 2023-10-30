@@ -1,0 +1,48 @@
+:root {
+  --color-main: #afcd6b;
+  --color-white: #fff;
+  --color-white-dark: #dbdada;
+  --color-black: #000;
+
+  --color-green-light: #8da555;
+  --color-green-dark-1: #515f30;
+  --color-green-dark-2: #6c8532;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  // 1rem = 10px
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+select,
+input,
+button,
+.btn-atras,
+textarea {
+  font-size: 1.5rem !important;
+}
+
+@import 'header.scss';
+@import 'footer.scss';
+@import 'inicio.scss';
+@import 'vender.scss';
+@import 'comprar.scss';

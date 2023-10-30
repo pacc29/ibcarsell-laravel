@@ -1,0 +1,30 @@
+.blog {
+	&__btn {
+		font-size: 1.5rem;
+	}
+
+	&__search-results {
+		font-size: 1.5rem;
+		text-decoration: none;
+		color: inherit;
+		transition: background-color 0.3s, color 0.3s;
+
+		&:hover {
+			color: var(--color-green-dark-1);
+		}
+	}
+
+	&__search-input {
+		font-size: 1.5rem;
+		background-color: var(--color-white);
+	}
+
+	&__post {
+		&-title {
+			font-size: 2rem;
+		}
+		&-body {
+			font-size: 1.5rem;
+		}
+	}
+}

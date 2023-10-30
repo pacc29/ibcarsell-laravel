@@ -1,0 +1,122 @@
+.auto_disponible {
+	width: 82%;
+}
+
+.btn-limpiar {
+	font-size: 1.5rem;
+}
+
+.filter {
+	&_header {
+		padding-left: 2rem;
+	}
+}
+
+.form-select {
+	font-size: 1.8rem;
+}
+
+.list_car {
+	padding: 2rem;
+	&__img {
+		height: 21rem;
+		& > a > img {
+			height: 100%;
+			width: 40rem;
+			object-fit: cover;
+		}
+	}
+
+	&__description {
+		width: 100%;
+		padding-left: 1rem;
+		padding-bottom: 2rem;
+	}
+
+	&__title {
+		margin-bottom: 5rem;
+		padding-left: 2.5rem;
+		& > h5 {
+			text-transform: uppercase;
+			color: #222;
+			font-weight: bold;
+			font-size: 2.2rem;
+		}
+
+		& > span {
+			display: inline-block;
+			padding: 1rem 5rem;
+			background-color: #79a11a;
+			color: var(--color-white);
+			font-size: 1.5rem;
+		}
+	}
+
+	&__detail {
+		&-icon {
+			color: var(--color-main);
+			font-size: 2.5rem;
+			margin-bottom: 1.5rem;
+		}
+
+		& {
+			&--type {
+				color: rgb(97, 97, 97);
+				font-size: 1.4rem;
+				text-transform: uppercase;
+				margin-bottom: 1.5rem;
+			}
+			&--value {
+				color: black;
+				font-weight: bold;
+				font-size: 1.3rem;
+			}
+		}
+	}
+}
+
+.sliders {
+	width: 100%;
+
+	&__label {
+		font-size: 1.5rem;
+	}
+
+	&__bar {
+		position: relative;
+		height: 2.5rem;
+
+		& input[type="range"]:first-child {
+			position: absolute;
+			width: 98%;
+			left: 0;
+			pointer-events: none;
+		}
+
+		& input[type="range"]:last-child {
+			position: absolute;
+			width: 98%;
+			right: 0;
+			pointer-events: none;
+		}
+
+		& input[type="range"]::-webkit-slider-runnable-track {
+			-webkit-appearance: none;
+			appearance: none;
+		}
+
+		& input[type="range"]::-webkit-slider-thumb {
+			position: relative;
+			z-index: 10;
+			-webkit-appearance: none;
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			background-color: #007bff;
+			border: 2px solid #fff;
+			border-radius: 50%;
+			cursor: pointer;
+			pointer-events: all;
+		}
+	}
+}
