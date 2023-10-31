@@ -28,9 +28,9 @@ class WebController extends Controller
         return view('_contacto', ['docTitle' => 'Contacto']);
     }
 
-    public function detalleAuto(Vehiculo $id): View
+    public function detalleAuto(Vehiculo $vehiculo): View
     {
-        $imagesPath = Vehiculo::imagePath($id->id);
-        return view('_detalle-auto', ['docTitle' => 'Comprar Auto', 'vehiculo' => $id, 'imagesPath' => $imagesPath]);
+        $imagesPath = Vehiculo::imagePath($vehiculo->id);
+        return view('_detalle-auto', ['docTitle' => 'Comprar Auto', 'vehiculo' => $vehiculo, 'imagesPath' => $imagesPath]);
     }
 }

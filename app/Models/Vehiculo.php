@@ -139,4 +139,16 @@ class Vehiculo extends Model
         $imagesPath = public_path("storage/images/imagenes_vehiculos/{$vehiculoId}");
         return File::allFiles($imagesPath);
     }
+
+    public static function saveImg($archivos, $path, $setPrincipal = false)
+    {
+        foreach ($archivos as $index => $archivo) {
+            if ($setPrincipal && $index === 0) {
+                $extension = $archivo->getClientOriginalExtension();
+                $archivo->storeAs($path, 'principal.' . $extension);
+            } else {
+                $archivo->store($path);
+            }
+        }
+    }
 }

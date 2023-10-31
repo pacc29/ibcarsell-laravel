@@ -1,6 +1,6 @@
 <div id="{{$vehiculo->id}}" class="cars__card col col-4 gy-4">
   <div class="card">
-    <a href="{{ route('detalle-auto', ['id' => $vehiculo->id]) }}" wire:navigate />
+    <a href="{{ route('detalle-auto', ['vehiculo' => $vehiculo->id]) }}" wire:navigate />
     <img class="cars__card-img w-100"
       src="{{ asset('/storage/images/imagenes_vehiculos/'.$vehiculo->id.'/principal.jpg') }}"
       alt="auto_{{$vehiculo->id}}">

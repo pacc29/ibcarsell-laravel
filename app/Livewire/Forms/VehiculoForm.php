@@ -7,53 +7,53 @@ use Livewire\Form;
 
 class VehiculoForm extends Form
 {
-    #[Rule(['required', 'size:7', 'regex:/^[A-Z0-9]{3}-[A-Z0-9]{3}$/', 'unique:App\Models\Venta,placa'])]
-    public $placa;
+    #[Rule(['required', 'size:7', 'regex:/^[A-Z0-9]{3}-[A-Z0-9]{3}$/', 'unique:App\Models\Vehiculo,placa'])]
+    public $placa = '';
 
-    #[Rule(['alpha:ascii'])]
-    public $descripcion;
+    #[Rule('alpha:ascii')]
+    public $descripcion = '';
 
     #[Rule(['required', 'digits_between:1,2'])]
-    public $cilindros;
+    public $cilindros = '';
 
     #[Rule(['required', 'digits_between:1,8'])]
-    public $cilindrada;
+    public $cilindrada = '';
 
     #[Rule(['required', 'digits_between:1,2'])]
-    public $puertas;
+    public $puertas = '';
 
     #[Rule(['required', 'lte:50000', 'regex:/^[0-9]+(\.[0-9]+)?$/'])]
-    public $precio;
+    public $precio = '';
 
     #[Rule(['required', 'digits_between:1,6'])]
-    public $kilometraje;
+    public $kilometraje = '';
 
-    public $fecha_fabricacion;
+    public $fecha_fabricacion = '';
 
-    public $fecha_modelo;
+    public $fecha_modelo = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $condicion_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $marca_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $modelo_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $carroceria_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $transmision_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $combustible_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $traccion_id = '';
 
-    #[Rule(['required'])]
+    #[Rule('required')]
     public $ubicacion_id = '';
 
     public $archivos = [];

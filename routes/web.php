@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WebController::class, 'inicio'])->name('inicio');
 Route::get('/inicio', [WebController::class, 'inicio'])->name('inicio');
 Route::get('/auto-disponible', [WebController::class, 'comprar'])->name('comprar');
-Route::get('/auto-disponible/{id}', [WebController::class, 'detalleAuto'])->name('detalle-auto');
+Route::get('/auto-disponible/{vehiculo}', [WebController::class, 'detalleAuto'])->name('detalle-auto');
 Route::get('/blog', [WebController::class, 'blog'])->name('blog');
 
 Route::get('/vender', [WebController::class, 'vender'])->name('vender');

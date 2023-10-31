@@ -31,7 +31,8 @@ wire:model="{{$name}}Value" step="{{$step}}">
 @break
 
 @default
-<input name="{{$name}}" {{$attributes->merge(['class' => $classes])}} wire:model.blur="{{$name}}" type="{{$type}}"
+<input name="{{$name}}" {{$attributes->merge(['class' => $classes])}} wire:model.live.debounce.250ms="{{$name}}"
+type="{{$type}}"
 value="{{old($name)}}" id="{{$name}}"
 autocomplete="on">
 @break

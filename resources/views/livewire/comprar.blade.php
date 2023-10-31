@@ -186,7 +186,7 @@ new class extends Component {
             @forelse ($vehiculosLista as $vehiculo)
             <div id="{{$vehiculo->id}}" class="d-flex list_car">
                 <div class="list_car__img">
-                    <a href="{{route('detalle-auto', ['id' => $vehiculo->id])}}" wire:navigate><img
+                    <a href="{{route('detalle-auto', ['vehiculo' => $vehiculo->id])}}" wire:navigate><img
                             src="{{ asset('storage/images/imagenes_vehiculos/'.$vehiculo->id.'/principal.jpg') }}"
                             alt="vehiculo_{{$vehiculo->id}}"></a>
                 </div>
@@ -222,6 +222,7 @@ new class extends Component {
             @empty
             <p>No se encontraron resultados de busqueda</p>
             @endforelse
+
         </div>
         <div id="pagination">
             {{$vehiculosLista->links()}}

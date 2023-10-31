@@ -6,6 +6,8 @@ use Livewire\Attributes\Rule;
 use Livewire\WithFileUploads;
 use App\Jobs\EnviarVentaMail;
 use App\Models\Venta;
+use App\Models\Vehiculo;
+
 
 new class extends Component {
 
@@ -25,9 +27,7 @@ new class extends Component {
         $form = $this->form->all();
         $venta = Venta::create($form);
 
-        foreach ($this->form->archivos as $archivo) {
-            $archivo->store('ventas/'.$venta->id);
-        }
+        Vehiculo::saveImg($this->form->archivos, "ventas/{$venta->id}");
         
         unset($form['archivos']);
 
@@ -114,9 +114,9 @@ new class extends Component {
         <div class="row my-4">
             <x-form-field name="form.archivos" label="Subir Archivos" classes=''>
                 <x-input name="form.archivos" type="file" />
-                @if ($errors->get('form.archivos.*'))
-                <x-error-message :messages="[$errors->first('form.archivos.*')]" />
-                @endif
+                @error("form.archivos.*")
+                <x-error-message :message="$errors->first('form.archivos.*')" />
+                @enderror
             </x-form-field>
         </div>
 

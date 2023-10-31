@@ -28,7 +28,6 @@ new class extends Component {
     //     $this->validateOnly('form.archivos');
     // }
     
-    
     public function updatedFormFechaFabricacion() {
         $this->validateOnly('form.fecha_fabricacion');
     }
@@ -42,13 +41,10 @@ new class extends Component {
         $form = $this->form->all();
         $vehiculo = Vehiculo::create($form);
 
-        foreach ($this->form->archivos as $archivo) {
-            // REVISAR ESSTO:
-            // $archivo->store(public_path('storage/images/imagenes_vehiculos/'.$vehiculo->id.'/'));
-        }
+        Vehiculo::saveImg($this->form->archivos, "public/images/imagenes_vehiculos/{$vehiculo->id}", true);      
 
         $this->form->reset();
-        session()->flash('Success', "Vehículo creado satisfactoriamente");
+        session()->flash('success', "Vehículo creado satisfactoriamente");
     }
 
     public function with(): array {
@@ -119,7 +115,7 @@ new class extends Component {
         <div class="row justify-content-center mb-5">
             <x-form-field name="form.condicion_id" label="Condición"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.condicion_id">
+                <x-select model=".live.debounce.250ms" name="form.condicion_id">
                     <x-option value=" " item="Condición" />
                     <x-slot:list>
                         @foreach ($condiciones as $condicion)
@@ -141,7 +137,8 @@ new class extends Component {
             </x-form-field>
 
             <x-form-field name="form.modelo_id" label="Modelo" classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.modelo_id" :status="$form->marca_id ? '' : 'disabled'">
+                <x-select model=".live.debounce.250ms" name="form.modelo_id"
+                    :status="$form->marca_id ? '' : 'disabled'">
                     <x-option value=" " item="Modelo" />
                     <x-slot:list>
                         @if(!empty($modelos))
@@ -157,7 +154,7 @@ new class extends Component {
         <div class="row justify-content-center mb-5">
             <x-form-field name="form.carroceria_id" label="Carrocería"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.carroceria_id">
+                <x-select model=".live.debounce.250ms" name="form.carroceria_id">
                     <x-option value=" " item="Carrocería" />
                     <x-slot:list>
                         @foreach ($carrocerias as $carroceria)
@@ -169,7 +166,7 @@ new class extends Component {
 
             <x-form-field name="form.transmision_id" label="Transmisión"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.transmision_id">
+                <x-select model=".live.debounce.250ms" name="form.transmision_id">
                     <x-option value=" " item="Transmisión" />
                     <x-slot:list>
                         @foreach ($transmisiones as $transmision)
@@ -181,7 +178,7 @@ new class extends Component {
 
             <x-form-field name="form.combustible_id" label="Combustible"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.combustible_id">
+                <x-select model=".live.debounce.250ms" name="form.combustible_id">
                     <x-option value=" " item="Combustible" />
                     <x-slot:list>
                         @foreach ($combustibles as $combustible)
@@ -195,7 +192,7 @@ new class extends Component {
         <div class="row justify-content-center mb-5">
             <x-form-field name="form.traccion_id" label="Tracción"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.traccion_id">
+                <x-select model=".live.debounce.250ms" name="form.traccion_id">
                     <x-option value=" " item="Tracción" />
                     <x-slot:list>
                         @foreach ($tracciones as $traccion)
@@ -207,7 +204,7 @@ new class extends Component {
 
             <x-form-field name="form.ubicacion_id" label="Ubicación"
                 classes="d-flex flex-column align-items-start col col-4">
-                <x-select model=".blur" name="form.ubicacion_id">
+                <x-select model=".live.debounce.250ms" name="form.ubicacion_id">
                     <x-option value=" " item="Ubicación" />
                     <x-slot:list>
                         @foreach ($ubicaciones as $ubicacion)
@@ -220,10 +217,18 @@ new class extends Component {
             <x-form-field name="form.archivos" label="Subir archivos"
                 classes="d-flex flex-column align-items-start col col-4">
                 <x-input name="form.archivos" type="file" />
-                @if ($errors->get('form.archivos.*'))
-                <x-error-message :messages="[$errors->first('form.archivos.*')]" />
-                @endif
+                @error("form.archivos.*")
+                <x-error-message :message="$errors->first('form.archivos.*')" />
+                @enderror
             </x-form-field>
+        </div>
+
+        <div class="d-flex gap-2 mb-5">
+            @if ($form->archivos)
+            @foreach ($form->archivos as $archivo)
+            <img height="100px" src="{{$archivo->temporaryUrl()}}" alt="img">
+            @endforeach
+            @endif
         </div>
 
         <x-button>Guardar nuevo auto</x-button>
