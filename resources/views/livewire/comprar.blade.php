@@ -24,6 +24,29 @@ new class extends Component {
     public $minPrecio = '0', $maxPrecio = '50000';
     public $minPrecioValue = '0', $maxPrecioValue = '50000';
 
+    #[On('handleSliders')]
+    public function handleSliders($min, $max, $type) {
+        switch ($type) {
+            case 'Year':
+                $this->minYearValue = $min;
+                $this->maxYearValue = $max;
+                break;
+            
+            case 'Kilometraje':
+                $this->minKilometrajeValue = $min;
+                $this->maxKilometrajeValue = $max;
+                break;
+
+            case 'Precio':
+                $this->minPrecioValue = $min;
+                $this->maxPrecioValue = $max;
+                break;
+
+            default:
+                break;
+        }
+    }
+
     public function actualizaListado() {
         $atributos = [
             'condicion' => $this->condicion,
@@ -44,12 +67,20 @@ new class extends Component {
         ];
         $this->vehiculosLista = Vehiculo::Search($atributos)->paginate(env('COMPRA_MAX_VEHICULO_DISPLAY'));
         // dd( $this->vehiculosLista);
-        
     }
 
     public function limpiarCampos() {
+        $this->dispatch('resetSliders',
+            minYear: $this->minYear,
+            maxYear: $this->maxYear,
+            minKilometraje: $this->minKilometraje,
+            maxKilometraje: $this->maxKilometraje,
+            minPrecio: $this->minPrecio,
+            maxPrecio: $this->maxPrecio
+        );
+
         $this->reset([
-            'condicion', 'marca', 'modelo', 'carroceria', 'transmision', 'combustible', 'traccion', 'ubicacion', 'orden', 'minYear', 'maxYear', 'minKilometraje', 'maxKilometraje', 'minPrecio', 'maxPrecio'
+            'condicion', 'marca', 'modelo', 'carroceria', 'transmision', 'combustible', 'traccion', 'ubicacion', 'orden', 'minYearValue', 'maxYearValue', 'minKilometrajeValue', 'maxKilometrajeValue', 'minPrecioValue', 'maxPrecioValue'
         ]);
         $this->resetPage();
     }
@@ -68,6 +99,7 @@ new class extends Component {
         return ['vehiculosLista' => $this->vehiculosLista];
     }
 }; ?>
+
 
 <div class="row text-center my-4">
     <div class="col col-3">
@@ -151,15 +183,15 @@ new class extends Component {
             </x-select>
 
             <div class="sliders" id="sliders">
-                <x-double-slider name="Year" placeholder="Año" :min="$minYear" :max="$maxYear" :minValue="$minYearValue"
-                    :maxValue="$maxYearValue" step="1" />
+                <x-double-slider name="Year" placeholder="Año" :min="$minYear" :max="$maxYear" :minvalue="$minYearValue"
+                    :maxvalue="$maxYearValue" step="1" />
 
                 <x-double-slider name="Kilometraje" placeholder="Kilometraje" :min="$minKilometraje"
-                    :max="$maxKilometraje" :minValue="$minKilometrajeValue" :maxValue="$maxKilometrajeValue"
+                    :max="$maxKilometraje" :minvalue="$minKilometrajeValue" :maxvalue="$maxKilometrajeValue"
                     step="10000" />
 
                 <x-double-slider name="Precio" placeholder="Precio" :min="$minPrecio" :max="$maxPrecio"
-                    :minValue="$minPrecioValue" :maxValue="$maxPrecioValue" step="1000" />
+                    :minvalue="$minPrecioValue" :maxvalue="$maxPrecioValue" step="1000" />
             </div>
         </div>
     </div>
@@ -229,3 +261,4 @@ new class extends Component {
         </div>
     </div>
 </div>
+@vite(['resources/js/comprar.js'])

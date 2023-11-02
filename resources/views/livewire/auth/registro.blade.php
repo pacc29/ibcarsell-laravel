@@ -30,7 +30,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <form wire:submit="save" class="card p-4">
+    <form wire:submit="save" class="card px-4 pb-4">
         @csrf
         <x-form-field name="nombre" label="Nombre" classes="my-4">
             <x-input name="nombre" />

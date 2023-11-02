@@ -222,14 +222,8 @@ new class extends Component {
                 @enderror
             </x-form-field>
         </div>
-
-        <div class="d-flex gap-2 mb-5">
-            @if ($form->archivos)
-            @foreach ($form->archivos as $archivo)
-            <img height="100px" src="{{$archivo->temporaryUrl()}}" alt="img">
-            @endforeach
-            @endif
-        </div>
+        
+        <x-prev-images :form="$form" />
 
         <x-button>Guardar nuevo auto</x-button>
     </form>

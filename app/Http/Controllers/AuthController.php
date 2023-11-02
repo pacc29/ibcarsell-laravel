@@ -27,4 +27,9 @@ class AuthController extends Controller
     {
         return view('auth.admin._nuevo-auto', ['docTitle' => 'Nuevo Auto']);
     }
+
+    public function editarAuto(): View
+    {
+        return view('auth.admin._editar-auto', ['docTitle' => 'Editar Auto']);
+    }
 }

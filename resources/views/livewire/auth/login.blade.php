@@ -25,7 +25,7 @@ new class extends Component {
 
 <div>
     <x-alert-message />
-    <form wire:submit="attemptLogin" class="card p-4">
+    <form wire:submit="attemptLogin" class="card px-4 pb-4">
         @csrf
         <x-form-field name="email" label="Email" classes="my-4">
             <x-input name="email" />

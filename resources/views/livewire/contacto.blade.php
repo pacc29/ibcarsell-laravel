@@ -3,36 +3,24 @@
 use Livewire\Volt\Component;
 use Livewire\Attributes\Rule; 
 use App\Jobs\EnviarContactoMail;
-
+use App\Livewire\Forms\ContactoForm;
 
 new class extends Component {
-    
-    #[Rule('required|min:3|max:25')]
-    public $nombre;
 
-    #[Rule('required|email|unique:users,email')] 
-     public $email;
-
-    #[Rule('required|digits:9')]
-    public $telefono;
-    
-    #[Rule('required')]
-    public $interes = 'Compra';
-
-    #[Rule('required|min:100|max:500|regex:/^[A-Za-z0-9,;: ]+$/')]
-    public $mensaje;
+    public ContactoForm $form;
 
     public function send() {
-        $validated = $this->validate();
+        $this->validate();
+        $form = $this->form->all();
 
         // Enviar por correo
-        $validated = ['sendTo' => env('CORREO_CONTACTO_IBCARSELL'),
-                    ...$validated];
+        $form = ['sendTo' => env('CORREO_CONTACTO_IBCARSELL'),
+                    ...$form];
 
-        dispatch(new EnviarContactoMail($validated));
+        dispatch(new EnviarContactoMail($form));
 
         // Success
-        $this->reset();
+        $this->form->reset();
         session()->flash('success', "Email de contacto enviado satisfactoriamente");   
     }
     
@@ -45,31 +33,31 @@ new class extends Component {
 
 <div>
     <x-alert-message />
-    <form wire:submit="send">
+    <form wire:submit="send" class="card px-4 pb-4">
         @csrf
         <div class="row my-4">
             <div class="col col-6">
-                <x-form-field name="nombre" label="Nombre" classes="d-flex flex-column">
-                    <x-input name="nombre" />
+                <x-form-field name="form.nombre" label="Nombre" classes="d-flex flex-column">
+                    <x-input name="form.nombre" />
                 </x-form-field>
             </div>
             <div class="col col-6">
-                <x-form-field name="email" label="Email" classes="d-flex flex-column">
-                    <x-input name="email" />
+                <x-form-field name="form.email" label="Email" classes="d-flex flex-column">
+                    <x-input name="form.email" />
                 </x-form-field>
             </div>
         </div>
 
         <div class="row my-4">
             <div class="col col-6">
-                <x-form-field name="telefono" label="Telefono" classes="d-flex flex-column">
-                    <x-input name="telefono" />
+                <x-form-field name="form.telefono" label="Telefono" classes="d-flex flex-column">
+                    <x-input name="form.telefono" />
                 </x-form-field>
 
             </div>
             <div class="col col-6">
-                <x-form-field name="interes" label="Interés" classes=''>
-                    <x-select name="interes" model=".live.blur">
+                <x-form-field name="form.interes" label="Interés" classes=''>
+                    <x-select name="form.interes" model=".live.debounce.250ms">
                         <x-option item="Seleccione..." status="disabled" />
                         <x-slot:list>
                             @foreach ($arr as $item)
@@ -82,8 +70,8 @@ new class extends Component {
         </div>
 
         <div class="row my-4">
-            <x-form-field name="mensaje" label="Mensaje" classes=''>
-                <x-textarea name="mensaje" />
+            <x-form-field name="form.mensaje" label="Mensaje" classes=''>
+                <x-textarea name="form.mensaje" />
             </x-form-field>
         </div>
 

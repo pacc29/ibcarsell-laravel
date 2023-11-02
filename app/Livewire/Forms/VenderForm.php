@@ -8,33 +8,33 @@ use Livewire\Form;
 class VenderForm extends Form
 {
     #[Rule('required|min:3|max:25')]
-    public $nombre;
+    public $nombre = '';
 
     #[Rule('required|min:3|max:25')]
-    public $apellido;
+    public $apellido = '';
 
     #[Rule('required|email|unique:users,email')]
-    public $email;
+    public $email = '';
 
     #[Rule('required|digits:9')]
-    public $telefono;
+    public $telefono = '';
 
     #[Rule('required|max:36|alpha:ascii')]
-    public $marca;
+    public $marca = '';
 
     #[Rule('required|max:36|alpha_dash:ascii')]
-    public $modelo;
+    public $modelo = '';
 
     #[Rule('required|digits_between:1,6')]
-    public $kilometraje;
+    public $kilometraje = '';
 
-    public $fecha_fabricacion;
+    public $fecha_fabricacion = '';
 
     #[Rule('required|size:7|regex:/^[A-Z0-9]{3}-[A-Z0-9]{3}$/|unique:App\Models\Venta,placa')]
-    public $placa;
+    public $placa = '';
 
     #[Rule('required|min:100|max:500|regex:/^[A-Za-z0-9,;: ]+$/')]
-    public $mensaje;
+    public $mensaje = '';
 
     public $archivos = [];
 

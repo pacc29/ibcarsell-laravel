@@ -26,8 +26,7 @@ value="{{old($name)}}" id="{{$name}}" multiple >
 
 @case('range')
 @props(['step'])
-<input name="{{$name}}" type="{{$type}}" id="{{$name}}" {{$attributes->merge(['class' => $classes])}}
-wire:model="{{$name}}Value" step="{{$step}}">
+<input name="{{$name}}" type="{{$type}}" id="{{$name}}" {{$attributes->merge(['class' => $classes])}} step="{{$step}}">
 @break
 
 @default

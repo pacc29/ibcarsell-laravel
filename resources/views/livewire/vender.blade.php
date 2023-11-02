@@ -46,7 +46,7 @@ new class extends Component {
 
 <div>
     <x-alert-message />
-    <form wire:submit="send">
+    <form wire:submit="send" class="card px-4 pb-4">
         @csrf
         <div class="row my-4">
             <div class="col col-6">
@@ -120,6 +120,8 @@ new class extends Component {
             </x-form-field>
         </div>
 
+        <x-prev-images :form="$form" />
+        
         <x-button>Enviar</x-button>
     </form>
 </div>
