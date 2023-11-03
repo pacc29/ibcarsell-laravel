@@ -1,5 +1,4 @@
-@props(['tableArray'])
-@foreach ($tableArray as $item)
+@props(['tablearray'])
 <div class="container my-5 table-responsive">
   <table class="table table-striped table-hover table-bordered">
     <thead>
@@ -17,9 +16,14 @@
         <th>Cilindrada</th>
         <th>Puertas</th>
         <th>Disponible en</th>
+        @if (auth()->user()->is_admin)
+        <th>Editar Auto</th>
+        <th>Eliminar Auto</th>
+        @endif
       </tr>
     </thead>
     <tbody>
+      @foreach ($tablearray as $item)
       <tr id="{{$item->id}}">
         <td>{{$item->marca->marca}}</td>
         <td>{{$item->modelo->modelo}}</td>
@@ -34,9 +38,20 @@
         <td>{{$item->cilindrada}}</td>
         <td>{{$item->puertas}}</td>
         <td>{{$item->ubicacion->ubicacion}}</td>
+        @if (auth()->user()->is_admin)
+        <td>
+          <a href="{{route('detalle-editar-auto', ['vehiculo' => $item->id])}}" wire:navigate>
+            <i class="bi bi-arrow-up-square-fill" style="font-size: 2rem"></i>
+          </a>
+        </td>
+        <td>
+          <a href="">
+            <i data-id='' class="bi bi-trash3-fill" style="font-size: 2rem; color: red"></i>
+          </a>
+        </td>
+        @endif
       </tr>
+      @endforeach
     </tbody>
   </table>
 </div>
-
-@endforeach

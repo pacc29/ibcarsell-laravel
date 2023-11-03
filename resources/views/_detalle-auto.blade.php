@@ -34,7 +34,7 @@
   {{-- END CAROUSEL --}}
 
   <div>
-    <x-table :tableArray="[$vehiculo]" />
+    <x-table :tablearray="[$vehiculo]" />
   </div>
 </div>
 @endsection

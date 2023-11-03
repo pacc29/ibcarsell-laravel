@@ -32,4 +32,9 @@ class AuthController extends Controller
     {
         return view('auth.admin._editar-auto', ['docTitle' => 'Editar Auto']);
     }
+
+    public function detalleEditarAuto(): VIew
+    {
+        return view();
+    }
 }

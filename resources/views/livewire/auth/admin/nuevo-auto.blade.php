@@ -62,7 +62,7 @@ new class extends Component {
 
 <div>
     <x-alert-message />
-    <form wire:submit="send">
+    <form wire:submit="send" class="card px-4 pb-4">
         @csrf
         <div class="row justify-content-center mb-5">
             <x-form-field name="form.placa" label="Placa" classes="d-flex flex-column align-items-start col col-4">
