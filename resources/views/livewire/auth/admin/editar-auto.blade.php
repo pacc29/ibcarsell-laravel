@@ -13,5 +13,6 @@ new class extends Component {
 }; ?>
 
 <div>
+    <x-alert-message />
     <x-table :tablearray="$vehiculos" />
 </div>

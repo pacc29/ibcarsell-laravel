@@ -3,6 +3,13 @@
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr class="table-light text-center">
+        @auth
+        @if (auth()->user()->is_admin)
+        <th>ID</th>
+        <th>Placa</th>
+        @endif
+        @endauth
+        <th>Condicion</th>
         <th>Marca</th>
         <th>Modelo</th>
         <th>Año de Fabricacion</th>
@@ -16,15 +23,24 @@
         <th>Cilindrada</th>
         <th>Puertas</th>
         <th>Disponible en</th>
+        @auth
         @if (auth()->user()->is_admin)
         <th>Editar Auto</th>
         <th>Eliminar Auto</th>
         @endif
+        @endauth
       </tr>
     </thead>
     <tbody>
       @foreach ($tablearray as $item)
       <tr id="{{$item->id}}">
+        @auth
+        @if (auth()->user()->is_admin)
+        <td>{{$item->id}}</td>
+        <td>{{$item->placa}}</td>
+        @endif
+        @endauth
+        <td>{{$item->condicion->condicion}}</td>
         <td>{{$item->marca->marca}}</td>
         <td>{{$item->modelo->modelo}}</td>
         <td>{{$item->fecha_fabricacion}}</td>
@@ -38,6 +54,7 @@
         <td>{{$item->cilindrada}}</td>
         <td>{{$item->puertas}}</td>
         <td>{{$item->ubicacion->ubicacion}}</td>
+        @auth
         @if (auth()->user()->is_admin)
         <td>
           <a href="{{route('detalle-editar-auto', ['vehiculo' => $item->id])}}" wire:navigate>
@@ -50,6 +67,7 @@
           </a>
         </td>
         @endif
+        @endauth
       </tr>
       @endforeach
     </tbody>

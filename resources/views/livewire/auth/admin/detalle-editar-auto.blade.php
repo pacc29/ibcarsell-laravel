@@ -1,10 +1,10 @@
 <?php
 
 use Livewire\Volt\Component;
-use App\Livewire\Forms\NuevoVehiculoForm;
-use App\Models\Modelo;
+use App\Livewire\Forms\EditarVehiculoForm;
 use App\Models\Condicion;
 use App\Models\Marca;
+use App\Models\Modelo;
 use App\Models\Carroceria;
 use App\Models\Transmision;
 use App\Models\Combustible;
@@ -16,41 +16,33 @@ use Livewire\WithFileUploads;
 new class extends Component {
     use WithFileUploads;
 
-    public NuevoVehiculoForm $form;
-    public $modelos = [];
+    public EditarVehiculoForm $form;
+    public $vehiculo;
+
+    public function send() {
+        $this->form->update();
+
+        $form = $this->form->all();
     
+        // SALVAR IMAGENES
+
+        return redirect()->route('editar-auto')->with('success', 'Vehiculo editado satisfactoriamente');
+    }
+
     public function handleModelo() {
         $this->reset(['form.modelo_id']);
         $this->modelos = Modelo::where('marca_id', $this->form->marca_id)->get();
     }
 
-    // public function updatedFormArchivos() {
-    //     $this->validateOnly('form.archivos');
-    // }
-    
-    // public function updatedFormFechaFabricacion() {
-    //     $this->validateOnly('form.fecha_fabricacion');
-    // }
-    
-    // public function updatedFormFechaModelo() {
-    //     $this->validateOnly('form.fecha_modelo');
-    // }
-    
-    public function send() {
-        $this->validate();
-        $form = $this->form->all();
-        $vehiculo = Vehiculo::create($form);
-
-        Vehiculo::saveImg($this->form->archivos, "public/images/imagenes_vehiculos/{$vehiculo->id}", true);      
-
-        $this->form->reset();
-        session()->flash('success', "Vehículo creado satisfactoriamente");
+    public function mount() {
+        $this->form->setForm($this->vehiculo);
     }
 
     public function with(): array {
         return [
             'condiciones' => Condicion::all(),
             'marcas' => Marca::all(),
+            'modelos' => Modelo::where('marca_id', $this->form->marca_id)->get(),
             'carrocerias' => Carroceria::all(),
             'transmisiones' => Transmision::all(),
             'combustibles' => Combustible::all(),
@@ -69,7 +61,7 @@ new class extends Component {
                 <x-input name="form.placa" />
             </x-form-field>
 
-            <x-form-field name="form.descripcion" label="Descripción"
+            <x-form-field name="form.descripcion" label="Descripcion"
                 classes="d-flex flex-column align-items-start col col-4">
                 <x-input name="form.descripcion" />
             </x-form-field>
@@ -225,6 +217,6 @@ new class extends Component {
 
         <x-prev-images :form="$form" />
 
-        <x-button>Guardar nuevo auto</x-button>
+        <x-button>Editar auto</x-button>
     </form>
 </div>

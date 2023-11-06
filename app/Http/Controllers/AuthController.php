@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -33,8 +34,8 @@ class AuthController extends Controller
         return view('auth.admin._editar-auto', ['docTitle' => 'Editar Auto']);
     }
 
-    public function detalleEditarAuto(): VIew
+    public function detalleEditarAuto(Vehiculo $vehiculo): View
     {
-        return view();
+        return view('auth.admin._detalle-editar-auto', ['docTitle' => 'Detalle de Auto', 'vehiculo' => $vehiculo]);
     }
 }

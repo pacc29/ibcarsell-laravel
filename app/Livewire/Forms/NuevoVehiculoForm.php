@@ -5,7 +5,7 @@ namespace App\Livewire\Forms;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
-class VehiculoForm extends Form
+class NuevoVehiculoForm extends Form
 {
     #[Rule(['required', 'size:7', 'regex:/^[A-Z0-9]{3}-[A-Z0-9]{3}$/', 'unique:App\Models\Vehiculo,placa'])]
     public $placa = '';
@@ -28,8 +28,10 @@ class VehiculoForm extends Form
     #[Rule(['required', 'digits_between:1,6'])]
     public $kilometraje = '';
 
+    #[Rule('required')]
     public $fecha_fabricacion = '';
-
+    
+    #[Rule('required')]
     public $fecha_modelo = '';
 
     #[Rule('required')]
@@ -61,8 +63,8 @@ class VehiculoForm extends Form
     public function rules()
     {
         return [
-            'fecha_fabricacion' => ['required', 'digits:4', 'gte:2010', 'lte:' . date('Y')],
-            'fecha_modelo' => ['required', 'digits:4', 'gte:2010', 'lte:' . date('Y')],
+            'fecha_fabricacion' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
+            'fecha_modelo' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
             'archivos' => ['required', 'array', 'between:1,5'],
             'archivos.*' => ['file', 'mimes:jpg,png,mp4,webm', 'max:2048']
         ];
