@@ -13,8 +13,6 @@ new class extends Component {
     use WithFileUploads;
     public VenderForm $form;
 
- 
-
     public function send() {
         $this->validate();
         $form = $this->form->all();
