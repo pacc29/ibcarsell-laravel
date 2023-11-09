@@ -8,19 +8,12 @@ use App\Jobs\EnviarVentaMail;
 use App\Models\Venta;
 use App\Models\Vehiculo;
 
-
 new class extends Component {
 
     use WithFileUploads;
     public VenderForm $form;
 
-    public function updatedFormFechaFabricacion() {
-        $this->validateOnly('form.fecha_fabricacion');
-    }
-
-    // public function updatedFormArchivos() {
-    //     $this->validateOnly('form.archivos');
-    // }
+ 
 
     public function send() {
         $this->validate();
@@ -42,6 +35,18 @@ new class extends Component {
         $this->form->reset();
         session()->flash('success', "Contacto para venta enviado satisfactoriamente");            
     }
+
+    public function updatedFormArchivos() {
+        $this->validateOnly('form.archivos.*');
+    }
+
+    public function updatedFormFechaFabricacion() {
+        $this->validateOnly('form.fecha_fabricacion');
+    }
+
+    // public function updatedFormArchivos() {
+    //     $this->validateOnly('form.archivos');
+    // }
 }; ?>
 
 <div>
@@ -121,7 +126,7 @@ new class extends Component {
         </div>
 
         <x-prev-images :form="$form" />
-        
+
         <x-button>Enviar</x-button>
     </form>
 </div>

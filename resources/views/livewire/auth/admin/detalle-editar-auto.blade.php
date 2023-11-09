@@ -20,13 +20,25 @@ new class extends Component {
     public $vehiculo;
 
     public function send() {
+        $this->validate();
         $this->form->update();
-
-        $form = $this->form->all();
-    
-        // SALVAR IMAGENES
+        $archivos = $this->form->archivos;
+        $vehiculoId = $this->vehiculo->id;
+   
+        // GUARDAR IMAGENES EN CASO DE QUE EXISTAN
+        if(!empty($archivos)) {
+            $path = "images/imagenes_vehiculos/{$vehiculoId}";
+            $exists = glob("storage/{$path}/principal.{jpg,png}", GLOB_BRACE);
+            $storagePath = "public/{$path}";
+            if(empty($exists)) Vehiculo::saveImg($archivos, $storagePath, true);
+            else Vehiculo::saveImg($archivos, $storagePath);
+        }
 
         return redirect()->route('editar-auto')->with('success', 'Vehiculo editado satisfactoriamente');
+    }
+
+    public function updatedFormArchivos() {
+        $this->validateOnly('form.archivos.*');
     }
 
     public function handleModelo() {

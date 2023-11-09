@@ -62,6 +62,7 @@ class EditarVehiculoForm extends Form
     #[Rule('required')]
     public $ubicacion_id = '';
 
+    #[Rule(['array', 'between:0,5'])]
     public $archivos = [];
 
     public function rules()
@@ -70,7 +71,7 @@ class EditarVehiculoForm extends Form
             'placa' => [rulez::unique('App\Models\Vehiculo', 'placa')->ignore($this->vehiculo->id)],
             'fecha_fabricacion' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
             'fecha_modelo' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
-            'archivos' => ['array', 'between:1,5'],
+            // 'archivos' => ['array', 'between:1,5'],
             'archivos.*' => ['file', 'mimes:jpg,png,mp4,webm', 'max:2048']
         ];
     }

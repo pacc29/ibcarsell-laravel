@@ -58,6 +58,7 @@ class NuevoVehiculoForm extends Form
     #[Rule('required')]
     public $ubicacion_id = '';
 
+    #[Rule(['required', 'array', 'between:1,5'])]
     public $archivos = [];
 
     public function rules()
@@ -65,7 +66,7 @@ class NuevoVehiculoForm extends Form
         return [
             'fecha_fabricacion' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
             'fecha_modelo' => ['digits:4', 'gte:2010', 'lte:' . date('Y')],
-            'archivos' => ['required', 'array', 'between:1,5'],
+            // 'archivos' => ['required', 'array', 'between:1,5'],
             'archivos.*' => ['file', 'mimes:jpg,png,mp4,webm', 'max:2048']
         ];
     }

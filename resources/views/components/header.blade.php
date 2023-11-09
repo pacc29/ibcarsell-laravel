@@ -26,7 +26,7 @@
           <livewire:auth.logout />
           @if (auth()->user()->is_admin)
           <li class="nav-item">
-            <a class="header__item header__item-4 nav-link mx-5" href="{{route('admin')}}" wire:navigate>Admin</a>
+            <a class="header__item header__item-4 nav-link mx-5" href="{{route('admin')}}" wire:navigate>Administrador</a>
           </li>
           @endif
           @else

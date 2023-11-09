@@ -40,11 +40,16 @@ new class extends Component {
         $this->validate();
         $form = $this->form->all();
         $vehiculo = Vehiculo::create($form);
+        $storagePath = "public/images/imagenes_vehiculos/{$vehiculo->id}";
 
-        Vehiculo::saveImg($this->form->archivos, "public/images/imagenes_vehiculos/{$vehiculo->id}", true);      
+        Vehiculo::saveImg($this->form->archivos, $storagePath, true);      
 
         $this->form->reset();
         session()->flash('success', "Vehículo creado satisfactoriamente");
+    }
+
+    public function updatedFormArchivos() {
+        $this->validateOnly('form.archivos.*');
     }
 
     public function with(): array {
