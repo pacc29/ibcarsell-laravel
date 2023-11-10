@@ -100,7 +100,6 @@ new class extends Component {
     }
 }; ?>
 
-
 <div class="row text-center my-4">
     <div class="col col-3">
         <x-button wire:click.prevent="limpiarCampos" type="" classes="btn btn-success mb-4 btn-limpiar w-100">Limpiar
